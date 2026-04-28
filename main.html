@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprajit Abhi - Aspiring Cybersecurity Analyst | Ethical Hacker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            text-shadow: 0 0 10px currentColor;
+            transform: scale(1.05);
+        }
+
+        /* Mode Toggle Container */
+        .mode-toggle {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mode-btn {
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .mode-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .mode-btn:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: translateX(-50%);
+            transition: width 0.8s ease;
+        }
+
+        .hero-content h1.animate::after {
+            width: 100px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Dynamic Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: translateX(-50%);
+            transition: width 1s ease;
+        }
+
+        section h2.animate::before {
+            width: 150px;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 10px;
+            border: 4px solid;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 5px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1));
+            transition: height 0.5s ease;
+        }
+
+        .skill-category:hover::before {
+            height: 100%;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: translateY(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .skill-list li:hover::before {
+            width: 20px;
+        }
+
+        .skill-list li:hover {
+            padding-left: 2rem;
+            transform: translateX(10px);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-top: 4px solid;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .project-features {
+            margin: 1.5rem 0;
+        }
+
+        .project-features li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .project-features li:hover {
+            transform: translateX(10px);
+        }
+
+        .project-features li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-features li:hover::before {
+            transform: scale(1.2);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--project-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-image:hover {
+            transform: scale(1.02);
+        }
+
+        .project-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Certifications */
+        .certifications {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cert-card {
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 5px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+            transition: width 0.6s ease;
+        }
+
+        .cert-card:hover::before {
+            width: 100%;
+        }
+
+        .cert-card:hover {
+            transform: translateX(20px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: translateX(-50%);
+            transition: width 0.4s ease;
+        }
+
+        .contact-link:hover::before {
+            width: 100%;
+        }
+
+        .contact-link i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .contact-link:hover i {
+            transform: rotateY(360deg) scale(1.2);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-15px);
+        }
+
+        /* Like Button */
+        .like-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .like-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .like-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            .mode-toggle {
+                position: static;
+                transform: none;
+                right: auto;
+                top: auto;
+                margin-top: 1rem;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================================
+        THEME MODES - FIXED LIGHT MODE
+        ============================================================================ */
+
+        /* LIGHT MODE (Default) - FIXED COLORS */
+        body.light-mode {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a2e;
+            --text-secondary: #555;
+            --accent: #4CAF50;
+            --accent-secondary: #2196F3;
+            --card-bg: #ffffff;
+            --border: #e0e0e0;
+            --project-bg: #f0f0f0;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        body.light-mode nav ul li a {
+            color: var(--text-primary);
+        }
+
+        body.light-mode nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        body.light-mode #hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+        }
+
+        body.light-mode .hero-content h1 {
+            background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-mode section h2 {
+            background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-mode #about {
+            background: var(--bg-secondary);
+        }
+
+        body.light-mode .skill-category {
+            background: var(--card-bg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left-color: var(--accent);
+        }
+
+        body.light-mode .skill-category h3 {
+            color: var(--accent);
+        }
+
+        body.light-mode .skill-list li i {
+            color: var(--accent);
+        }
+
+        body.light-mode .project-card {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            color: var(--text-primary);
+            border-top-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        body.light-mode .project-card h3 {
+            color: var(--accent);
+        }
+
+        body.light-mode .project-features li::before {
+            color: var(--accent);
+        }
+
+        body.light-mode .tech-tag {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        body.light-mode .cert-card {
+            background: var(--card-bg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-left-color: var(--accent-secondary);
+        }
+
+        body.light-mode .about-image img {
+            border-color: var(--accent);
+            background: var(--bg-secondary);
+        }
+
+        body.light-mode .cta-button {
+            background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        body.light-mode .mode-btn {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        body.light-mode .like-btn {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        body.light-mode #contact {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+        }
+
+        body.light-mode .contact-link i {
+            color: var(--accent);
+        }
+
+        body.light-mode .cert-header i {
+            color: var(--accent);
+        }
+
+        body.light-mode .view-cert-btn {
+            background: var(--accent);
+            color: #000;
+        }
+
+        body.light-mode .cert-badge {
+            background: rgba(76,175,80,0.2);
+            color: var(--accent);
+            border: 1px solid rgba(76,175,80,0.3);
+        }
+
+        /* DARK MODE */
+        body.dark-mode {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #00ff88;
+            --accent-secondary: #00d4ff;
+            --card-bg: #1a1a1a;
+            --border: #333;
+            --project-bg: #0a0a0a;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode nav {
+            background: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        body.dark-mode #hero {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        body.dark-mode #about {
+            background: var(--bg-secondary);
+        }
+
+        body.dark-mode .project-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            color: white;
+            box-shadow: 0 20px 40px rgba(0,255,136,0.2);
+        }
+
+        body.dark-mode .about-image img {
+            background: #0c0c0c;
+        }
+
+        body.dark-mode #contact {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+        }
+
+        body.dark-mode .mode-btn {
+            background: rgba(0, 255, 136, 0.3);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* HACKER MODE 🔥 */
+        body.hacker-mode {
+            --bg-primary: #000000;
+            --bg-secondary: #001100;
+            --text-primary: #00ff00;
+            --text-secondary: #00cc00;
+            --accent: #00ff00;
+            --accent-secondary: #00ff88;
+            --card-bg: #001100;
+            --border: #00ff00;
+            --project-bg: #000500;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        body.hacker-mode * {
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        body.hacker-mode nav {
+            background: rgba(0, 0, 0, 0.95) !important;
+            border-bottom: 2px solid #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        body.hacker-mode #hero {
+            background: radial-gradient(circle, #001100 0%, #000000 100%);
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        body.hacker-mode section h2,
+        body.hacker-mode .hero-content h1 {
+            animation: blink 1s infinite;
+            color: #00ff00 !important;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        body.hacker-mode .skill-category {
+            background: var(--card-bg);
+            border-left-color: #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        body.hacker-mode .project-card {
+            background: #001100;
+            border-top-color: #00ff00;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 30px #00ff00;
+        }
+
+        body.hacker-mode .project-features li::before {
+            color: #00ff00;
+            content: '>';
+        }
+
+        body.hacker-mode .tech-tag {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            font-family: 'Courier New', monospace;
+        }
+
+        body.hacker-mode .cert-card {
+            background: var(--card-bg);
+            border-left-color: #00ff88;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        body.hacker-mode .about-image img {
+            border-color: #00ff00;
+            background: #000500;
+            filter: drop-shadow(0 0 10px #00ff00);
+        }
+
+        body.hacker-mode .cta-button {
+            background: linear-gradient(45deg, #00ff00, #00ff88);
+            box-shadow: 0 0 20px #00ff00;
+            color: #000;
+            font-family: 'Courier New', monospace;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #00ff00; }
+            50% { box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
+            100% { box-shadow: 0 0 20px #00ff00; }
+        }
+
+        body.hacker-mode .mode-btn {
+            background: rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            font-size: 1.2rem;
+        }
+
+        body.hacker-mode .like-btn {
+            background: #ff0000;
+            color: #00ff00;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 15px #ff0000;
+            font-family: 'Courier New', monospace;
+        }
+
+        body.hacker-mode #contact {
+            background: radial-gradient(circle, #001100 0%, #000000 100%);
+        }
+
+        body.hacker-mode .contact-link i {
+            color: #00ff88;
+            text-shadow: 0 0 15px #00ff88;
+            animation: flicker 1.5s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Cert styles */
+        .cert-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-header i {
+            font-size: 2rem;
+        }
+
+        .cert-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            align-items: center;
+        }
+
+        .view-cert-btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-cert-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .view-cert-btn:hover::before {
+            left: 100%;
+        }
+
+        .view-cert-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cert-badge {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <div class="mode-toggle">
+                <button onclick="setMode('light')" class="mode-btn" title="Light Mode">☀️</button>
+                <button onclick="setMode('dark')" class="mode-btn" title="Dark Mode">🌙</button>
+                <button onclick="setMode('hacker')" class="mode-btn" title="Hacker Mode">💻</button>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="fade-in">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 id="heroTitle">Aprajit Abhi</h1>
+            <p class="subtitle">Aspiring Cybersecurity Analyst | Ethical Hacker</p>
+            <p>I am a passionate Cybersecurity student focused on ethical hacking, network security, and AI-driven security solutions. I enjoy building real-world tools and solving practical security challenges.</p>
+            <button onclick="scrollToProjects()" class="cta-button">View My Projects</button>
+            <button onclick="likePortfolio()" class="like-btn">
+                ❤️ <span id="likeCount">0</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="animate-title"><i class="fas fa-user"></i> About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a BCA (Cyber Security) student at St. Xavier's College of Management & Technology. I have a strong foundation in networking, Linux, and ethical hacking.</p>
+                <p>I work hands-on with tools like Nmap, Wireshark, Metasploit, and Burp Suite for reconnaissance, vulnerability analysis, and penetration testing.</p>
+                <p>Currently, I am building AI-powered cybersecurity tools and real-world web applications to strengthen my practical skills.</p>
+            </div>
+            <div class="about-image">
+                <img src="20251226_091436.jpg" alt="Aprajit Abhi">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+        <h2 class="animate-title"><i class="fas fa-tools"></i> Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-shield-alt"></i> Cybersecurity & Networking</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-network-wired"></i> Network Scanning (Nmap, Masscan)</li>
+                    <li><i class="fas fa-search"></i> Packet Analysis (Wireshark)</li>
+                    <li><i class="fas fa-bug"></i> Vulnerability Assessment</li>
+                    <li><i class="fas fa-binoculars"></i> Information Gathering</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-laptop-code"></i> Tools & Platforms</h3>
+                <ul class="skill-list">
+                    <li><i class="fab fa-linux"></i> Kali Linux</li>
+                    <li><i class="fas fa-network-wired"></i> Nmap</li>
+                    <li><i class="fas fa-globe"></i> WHOIS</li>
+                    <li><i class="fas fa-searchengin"></i> Seeker</li>
+                    <li><i class="fas fa-bolt"></i> ZAP (OWASP)</li>
+                    <li><i class="fas fa-spider"></i> Burp Suite</li>
+                    <li><i class="fas fa-rocket"></i> Metasploit Framework</li>
+                    <li><i class="fas fa-globe"></i> Gobuster</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Programming</h3>
+                <ul class="skill-list">
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-copyright"></i> C</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-cogs"></i> Other</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-file-word"></i> MS Word, Excel, PowerPoint</li>
+                    <li><i class="fas fa-video"></i> Basic Video Editing (After Effects, Premiere Pro)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="animate-title"><i class="fas fa-rocket"></i> Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card" onclick="openProject('https://github.com/aprajitabhi/AI-Cybersecurity-Suite')">
+                <div class="project-image">
+                    <img src="cyber.png" alt="AI Cybersecurity">
+                </div>
+                <h3><i class="fas fa-brain"></i> AI Cybersecurity Suite (Ongoing)</h3>
+                <p>A smart AI-powered toolkit designed to automate cybersecurity tasks.</p>
+                <ul class="project-features">
+                    <li>Phishing link detection</li>
+                    <li>IP address scanning</li>
+                    <li>Malware detection integration</li>
+                    <li>Voice command control</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">APIs</span>
+                    <span class="tech-tag">Kali Linux</span>
+                </div>
+            </div>
+            <div class="project-card" onclick="openProject('https://github.com/aprajitabhi/Threat-Detection-Tool')">
+                <div class="project-image">
+                    <img src="Screenshot 2026-02-01 203211.png" alt="Malware Detection">
+                </div>
+                <h3><i class="fas fa-virus"></i> Malware Detection System</h3>
+                <p>A Python-based tool designed to detect malicious files using signature and behavior-based techniques.</p>
+                <ul class="project-features">
+                    <li>File scanning for malware patterns</li>
+                    <li>Hash-based detection (MD5/SHA)</li>
+                    <li>Suspicious behavior identification</li>
+                    <li>CLI-based scanning tool</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Hashlib</span>
+                    <span class="tech-tag">VirusTotal API</span>
+                </div>
+            </div>
+            <div class="project-card" onclick="openProject('https://github.com/aprajitabhi/xcc-smartdesk')">
+                <div class="project-image">
+                    <img src="Screenshot 2026-04-20 201844.png" alt="XCC SmartDesk">
+                </div>
+                <h3><i class="fas fa-desktop"></i> XCC SmartDesk Web Application (Ongoing)</h3>
+                <p>A web platform developed for Xavier Coding Club to manage activities and communication.</p>
+                <ul class="project-features">
+                    <li>Student & club management system</li>
+                    <li>Event announcements and updates</li>
+                    <li>Smart dashboard for activity tracking</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="fade-in">
+        <h2 class="animate-title"><i class="fas fa-award"></i> My Certifications</h2>
+        <div class="certifications">
+            <!-- ISEA Certificate -->
+            <div class="cert-card" onclick="openCert('Screenshot 2025-03-29 000808.png')">
+                <div class="cert-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>🛡️ ISEA Certified (Cybersecurity Awareness)</h3>
+                </div>
+                <p><strong>Issued by:</strong> Ministry of Electronics & IT, Government of India</p>
+                <p><strong>Date:</strong> 2024</p>
+                <div class="cert-actions">
+                    <button class="view-cert-btn" onclick="openCert('Screenshot 2025-03-29 000808.png')">📄 View Certificate</button>
+                    <span class="cert-badge">✅ Verified</span>
+                </div>
+            </div>
+
+            <!-- Microsoft Certificate -->
+            <div class="cert-card" onclick="openCert('Screenshot 2025-03-24 220044.png')">
+                <div class="cert-header">
+                    <i class="fab fa-microsoft"></i>
+                    <h3>💻 Microsoft Cybersecurity Fundamentals</h3>
+                </div>
+                <p><strong>Issued by:</strong> Microsoft Learn</p>
+                <p><strong>Skills:</strong> Security, Privacy, Compliance</p>
+                <div class="cert-actions">
+                    <button class="view-cert-btn" onclick="openCert('Screenshot 2025-03-24 220044.png')">📄 View Certificate</button>
+                    <span class="cert-badge">⭐ Microsoft</span>
+                </div>
+            </div>
+
+            <!-- LinkedIn Learning -->
+            <div class="cert-card" onclick="openCert('Screenshot 2025-03-29 001002.png')">
+                <div class="cert-header">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>📚 LinkedIn Learning Certificates</h3>
+                </div>
+                <p><strong>Courses:</strong> Ethical Hacking, Network Security, Python for Security</p>
+                <p><strong>Platform:</strong> LinkedIn Learning</p>
+                <div class="cert-actions">
+                    <button class="view-cert-btn" onclick="openCert('Screenshot 2025-03-29 001002.png')">📄 View Certificates</button>
+                    <span class="cert-badge">🎓 Multiple</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Objective -->
+    <section class="fade-in" id="career">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="animate-title" style="font-size: 2.5rem; margin-bottom: 2rem;">🎯 Career Objective</h2>
+            <p style="font-size: 1.3rem; line-height: 1.8;">
+                To become a skilled cybersecurity professional and ethical hacker, capable of identifying vulnerabilities and securing systems against real-world threats. I aim to continuously learn, practice, and contribute to cybersecurity innovation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="animate-title"><i class="fas fa-envelope"></i> Contact</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9;">Let's connect and discuss cybersecurity opportunities!</p>
+        <div class="contact-links">
+            <a href="mailto:aprajitabhi.10.2182@gmail.com" class="contact-link" onclick="openEmail()">
+                <i class="fas fa-envelope"></i>
+                <span>aprajitabhi.10.2182@gmail.com</span>
+            </a>
+            <a href="mailto:aprajitabhi.10.2182@zohomail.in" class="contact-link" onclick="openEmail()">
+                <i class="fas fa-envelope"></i>
+                <span>aprajitabhi.10.2182@zohomail.in</span>
+            </a>
+            <a href="https://github.com/aprajitabhi" target="_blank" class="contact-link">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/aprajit-abhi-8331392a1/" target="_blank" class="contact-link">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Dynamic particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scroll function
+        function smoothScroll(targetId) {
+            document.getElementById(targetId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function scrollToProjects() {
+            smoothScroll('projects');
+        }
+
+        // Function to open projects in new tab
+        function openProject(url) {
+            if (url && url !== '#') {
+                window.open(url, '_blank');
+            } else {
+                alert('Project repository coming soon! 🚀');
+            }
+        }
+
+        // Function to open email
+        function openEmail() {
+            window.location.href = 'mailto:aprajitabhi.10.2182@gmail.com';
+        }
+
+        // Like Button
+        let likes = 0;
+        function likePortfolio() {
+            likes++;
+            document.getElementById("likeCount").innerText = likes;
+            
+            // Dynamic heart explosion effect
+            const btn = event.target;
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    createHeartExplosion(btn);
+                }, i * 100);
+            }
+        }
+
+        function createHeartExplosion(element) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = element.offsetLeft + element.offsetWidth/2 + 'px';
+            heart.style.top = element.offsetTop + 'px';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '10000';
+            heart.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = '30px';
+                heart.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => heart.remove(), 600);
+        }
+
+        // 🔥 PERFECT MODE SWITCHER
+        function setMode(mode) {
+            document.body.classList.remove("light-mode", "dark-mode", "hacker-mode");
+            
+            if (mode === "light") {
+                document.body.classList.add("light-mode");
+                localStorage.setItem('themeMode', 'light');
+            } else if (mode === "dark") {
+                document.body.classList.add("dark-mode");
+                localStorage.setItem('themeMode', 'dark');
+            } else if (mode === "hacker") {
+                document.body.classList.add("hacker-mode");
+                localStorage.setItem('themeMode', 'hacker');
+            }
+
+            if (mode === 'hacker') {
+                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAo');
+                audio.play().catch(() => {});
+            }
+        }
+
+        // Dynamic title animations
+        function animateTitles() {
+            const titles = document.querySelectorAll('.animate-title');
+            titles.forEach((title, index) => {
+                setTimeout(() => {
+                    title.classList.add('animate');
+                }, index * 200);
+            });
+        }
+
+        // Load saved theme and initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedMode = localStorage.getItem('themeMode') || 'light';
+            setMode(savedMode);
+            
+            createParticles();
+            animateTitles();
+
+            // Hero title animation
+            setTimeout(() => {
+                document.getElementById('heroTitle').classList.add('animate');
+            }, 500);
+
+            // CTA Button click handler
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    smoothScroll('projects');
+                });
+            }
+
+            // Navigation smooth scroll
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    smoothScroll(targetId);
+                });
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = document.body.classList.contains('hacker-mode') 
+                    ? 'rgba(0, 0, 0, 0.98)' 
+                    : document.body.classList.contains('dark-mode')
+                    ? 'rgba(18, 18, 18, 0.98)'
+                    : 'rgba(255, 255, 255, 0.98)';
+                nav.style.backdropFilter = 'blur(20px)';
+            } else {
+                nav.style.background = document.body.classList.contains('hacker-mode') 
+                    ? 'rgba(0, 0, 0, 0.95)' 
+                    : document.body.classList.contains('dark-mode')
+                    ? 'rgba(18, 18, 18, 0.95)'
+                    : 'rgba(255, 255, 255, 0.95)';
+                nav.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Enhanced fade in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced typing effect
+        const subtitle = document.querySelector('.subtitle');
+        if (subtitle) {
+            const text = subtitle.textContent;
+            subtitle.textContent = '';
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    subtitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 80 + Math.random() * 50);
+                }
+            }
+            setTimeout(typeWriter, 1000);
+        }
+
+        // Certificate Modal Viewer
+        function openCert(imageSrc) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(5px);
+                animation: modalSlideIn 0.3s ease;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    padding: 2rem;
+                    border-radius: 20px;
+                    max-width: 90%;
+                    max-height: 90%;
+                    position: relative;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+                    transform: scale(0.7);
+                    animation: modalZoom 0.3s ease forwards;
+                ">
+                    <img src="${imageSrc}" style="
+                        max-width: 100%;
+                        max-height: 70vh;
+                        object-fit: contain;
+                        border-radius: 10px;
+                    " onerror="this.src='https://via.placeholder.com/500x300/4CAF50/ffffff?text=No+Image'">
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        position: absolute;
+                        top: 1rem;
+                        right: 1rem;
+                        background: #ff4444;
+                        color: white;
+                        border: none;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        transition: all 0.3s ease;
+                    ">×</button>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        position: absolute;
+                        bottom: 1rem;
+                        right: 1rem;
+                        background: #4CAF50;
+                        color: white;
+                        border: none;
+                        padding: 0.5rem 1rem;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        font-size: 0.9rem;
+                    ">Close</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+        }
+
+        // Add modal animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes modalSlideIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes modalZoom {
+                from { transform: scale(0.7); }
+                to { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
