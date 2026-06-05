@@ -114,9 +114,10 @@
             }
 
             .nav-menu.open {
-            display: flex !important;
-            max-height: 1000px;
-            opacity: 1;
+                display: flex !important;
+                max-height: 1000px;
+                opacity: 1;
+            }
 
             .nav-menu li {
                 width: 100%;
@@ -149,11 +150,11 @@
             transition: left 0.5s;
         }
 
-        nav ul li a:hover::before {
+        .nav-menu li a:hover::before {
             left: 100%;
         }
 
-        nav ul li a:hover {
+        .nav-menu li a:hover {
             text-shadow: 0 0 10px currentColor;
             transform: scale(1.05);
         }
@@ -1524,11 +1525,11 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
-        body.light-mode nav ul li a {
+        body.light-mode .nav-menu li a {
             color: var(--text-primary);
         }
 
-        body.light-mode nav ul li a:hover {
+        body.light-mode .nav-menu li a:hover {
             color: var(--accent);
         }
 
